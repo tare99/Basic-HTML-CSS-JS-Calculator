@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="htmlwebpage-css.css" type="text/css">
+    <title>Webpage</title>
+</head>
+<body>
+   <div id="calculatorBody">
+       <header>ELECTRONIC CALCULATOR</header>
+       <div id="calcScreen">
+           <h5 id="inputNum">0</h5>
+       </div>
+           <table>
+               <tr>
+                    <td><input onclick="clearlAll()" class="btn" type="button" value="AC" name="" id="ac"></td>
+                    <td><input onclick="izbrisiCifru()" class="btn" type="button" value="CE" name="" id="ce"></td>
+                    <td><input onclick="buffer(id)" class="btn" type="button" value="÷" name="" id="divide"></td>
+                    <td><input onclick="buffer(id)" class="btn" type="button" value="X" name="" id="multiply"></td>
+               </tr>
+               <tr>
+                    <td><input onclick="dodaj(id)" class="btn" type="button" value="7" name="" id="seven"></td>
+                    <td><input onclick="dodaj(id)" class="btn" type="button" value="8" name="" id="eight"></td>
+                    <td><input onclick="dodaj(id)" class="btn" type="button" value="9" name="" id="nine"></td>
+                    <td><input onclick="buffer(id)" class="btn" type="button" value="-" name="" id="minus"></td>
+                </tr>
+                <tr>
+                    <td><input onclick="dodaj(id)" class="btn" type="button" value="4" name="" id="four"></td>
+                    <td><input onclick="dodaj(id)" class="btn" type="button" value="5" name="" id="five"></td>
+                    <td><input onclick="dodaj(id)" class="btn" type="button" value="6" name="" id="six"></td>
+                    <td><input onclick="buffer(id)" class="btn" type="button" value="+" name="" id="plus"></td>
+               </tr>
+               <tr>
+                    <td><input onclick="dodaj(id)" class="btn" type="button" value="1" name="" id="one"></td>
+                    <td><input onclick="dodaj(id)" class="btn" type="button" value="2" name="" id="two"></td>
+                    <td><input onclick="dodaj(id)" class="btn" type="button" value="3" name="" id="three"></td>
+                    <td rowspan="2"><input onclick="equal()" class="btn" type="button" value="=" name="" id="equal"></td>
+               </tr>
+               <tr>
+                    <td colspan="2"><input onclick="dodaj(id)" class="btn" type="button" value="0" name="" id="zero"></td>
+                    <td><input onclick="dodaj(id)" class="btn" type="button" value="." name="" id="dot"></td>
+               </tr>
+           </table>
+   </div>
+   <script>
+       var bfr,broj1,rezultat;
+       var broj2=null;
+       function dodaj(id)
+       {
+           scrValue=document.getElementById("inputNum");
+           btnValue=document.getElementById(id).value;
+           if(bfr===undefined)
+           {
+               if(scrValue.innerHTML==="0")
+               {
+                   scrValue.innerHTML=btnValue;
+               }
+               else
+               {
+                   scrValue.innerHTML+=btnValue;
+               }
+               if(broj2===null)
+               {
+                   broj1=Number(scrValue.innerHTML);
+               }
+               else
+               {
+                   broj2=Number(scrValue.innerHTML);
+               }
+           }
+           else
+           {
+               if(id==="dot")
+               {
+                   scrValue.innerHTML+=".";      
+               }
+               else
+               {
+                   scrValue.innerHTML=btnValue;
+                   broj2=Number(scrValue.innerHTML);
+               }
+           }
+           bfr=undefined;
+       };
+       function buffer(id)
+       {
+           bfr = document.getElementById(id).value;
+           tempId=id;
+           if(broj2!==null)
+           {
+               if(id==="plus")
+               {
+                   rezultat=broj1+broj2;
+               }
+               else if(id==="minus")
+               {
+                   rezultat=broj1-broj2;
+               }
+               else if(id==="divide")
+               {
+                   rezultat=broj1/broj2;
+               }
+               else if(id==="multiply")
+               {
+                   if(tempId2==="plus")
+                   {
+                       rezultat=broj1+broj2;
+                   }
+                   else if(tempId2==="minus")
+                   {
+                       rezultat=broj1-broj2;
+                   }
+                   else
+                   {
+                       rezultat=broj1*broj2;
+                   }
+               }
+               broj1=rezultat;
+               scrValue.innerHTML=rezultat.toString();
+           }
+           tempId2=id;
+       };
+       function equal()
+       {
+           buffer(tempId);
+           broj2=null;
+       }
+       function clearlAll()
+       {
+           scrValue.innerHTML="0";
+           broj2=null;
+           broj1=broj3=rezultat=bfr=undefined;
+       }
+       function izbrisiCifru()
+       {
+           if(scrValue.innerHTML!=="0")
+           {
+               var temp=Number(scrValue.innerHTML);
+               temp=temp/10;
+               temp=parseInt(temp);
+               scrValue.innerHTML=temp.toString();
+               if(broj2===null || broj2===0)
+               {
+                   broj1=Number(scrValue.innerHTML);
+               }
+               else
+               {
+                   broj2=Number(scrValue.innerHTML);
+               }
+           }
+       }
+
+   </script>
+</body>
+</html>
